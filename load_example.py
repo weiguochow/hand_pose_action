@@ -87,19 +87,26 @@ def _draw2dseg(ax, annot, idx1, idx2, c='r', alpha=1):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--root', required=True, help='Path to dataset install')
+    parser = argparse.ArgumentParser() # 声明个句柄
+    parser.add_argument('--root', required=True, help='Path to dataset install') # 加入 root 这个词语， 并且这个词语是要求填入的
     parser.add_argument('--subject', required=True, default='Subject_1')
     parser.add_argument('--action_name', required=True, default='open_liquid_soap')
     parser.add_argument('--seq_idx', required=True, default='1')
     parser.add_argument('--frame_idx', required=True, default=0, type=int)
-    parser.add_argument(
-        '--obj', required=True, choices=['liquid_soap', 'juice_bottle', 'milk', 'salt'])
-    args = parser.parse_args()
-    reorder_idx = np.array([
-        0, 1, 6, 7, 8, 2, 9, 10, 11, 3, 12, 13, 14, 4, 15, 16, 17, 5, 18, 19,
-        20
-    ])
+    parser.add_argument('--obj', required=True, choices=['liquid_soap', 'juice_bottle', 'milk', 'salt']) # choice 是加入了选择的余地
+    args = parser.parse_args() # 具化个句柄
+    reorder_idx = np.array([0, 1, 6, 7, 8, 2, 9, 10, 11, 3, 12, 13, 14, 4, 15, 16, 17, 5, 18, 19, 20]) # 重新生成个索引
+    
+    
+    # sample number of the target name, this is a dict list
+    
+    #sample = {
+    #    'subject': args.subject,
+    #    'action_name': args.action_name,
+    #    'seq_idx': args.seq_idx,
+    #    'frame_idx': args.frame_idx,
+    #    'object': args.obj
+    #}
 
     sample = {
         'subject': args.subject,
@@ -107,9 +114,10 @@ if __name__ == '__main__':
         'seq_idx': args.seq_idx,
         'frame_idx': args.frame_idx,
         'object': args.obj
-    }
+    } # store the information for the debug purpose, subject, action_name, seq_idx, frame_idx, and object
 
-    print('Loading sample {}'.format(sample))
+    print('Loading sample {}'.format(sample)) # print all the information for sampling
+    
     cam_extr = np.array(
         [[0.999988496304, -0.00468848412856, 0.000982563360594,
           25.7], [0.00469115935266, 0.999985218048, -0.00273845880292, 1.22],
