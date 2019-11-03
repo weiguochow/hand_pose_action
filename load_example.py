@@ -122,13 +122,16 @@ if __name__ == '__main__':
         [[0.999988496304, -0.00468848412856, 0.000982563360594,
           25.7], [0.00469115935266, 0.999985218048, -0.00273845880292, 1.22],
          [-0.000969709653873, 0.00274303671904, 0.99999576807,
-          3.902], [0, 0, 0, 1]])
+          3.902], [0, 0, 0, 1]]) # camera extrinisc 相机外参
+    
     cam_intr = np.array([[1395.749023, 0, 935.732544],
-                         [0, 1395.749268, 540.681030], [0, 0, 1]])
-    skeleton_root = os.path.join(args.root, 'Hand_pose_annotation_v1')
-    obj_root = os.path.join(args.root, 'Object_models')
-    obj_trans_root = os.path.join(args.root, 'Object_6D_pose_annotation_v1')
-    skel = get_skeleton(sample, skeleton_root)[reorder_idx]
+                         [0, 1395.749268, 540.681030], [0, 0, 1]]) # 相机内参， camera intrinsic
+    
+    skeleton_root = os.path.join(args.root, 'Hand_pose_annotation_v1') # skeletion file path root
+    obj_root = os.path.join(args.root, 'Object_models') # obj path 
+    obj_trans_root = os.path.join(args.root, 'Object_6D_pose_annotation_v1') # object_6D_pose path root
+    
+    skel = get_skeleton(sample, skeleton_root)[reorder_idx] # 获取骨架的坐标值
     if args.obj is not None:
         # Load object mesh
         object_infos = load_objects(obj_root)
